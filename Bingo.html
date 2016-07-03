@@ -1,0 +1,69 @@
+<html>
+<meta charset="utf-8">
+    <header>
+        <title>Segredo do Números</title>
+    </header>
+    
+    <style>
+        div{
+            width: 40%;
+            height: 200px%;
+            margin: 0 auto;
+            background-color: azure;
+            padding: 10px;
+            text-align: center;
+        }
+    
+    </style>
+    
+    <body>
+    
+        <div>
+            <h1>Bingo</h1>
+        
+            <input type="text" id="txtNumero" />
+            <input type="submit" id="btnIncluir" value="Verificar"/>
+        </div>
+        
+        
+        <script>
+        
+         var txtNumero = document.getElementById("txtNumero");
+         var btnIncluir = document.getElementById("btnIncluir");
+            
+          var numeros = [];
+          var incluiu = true;
+            
+            var incluiNumero = function()
+            {
+                for(i =0; i , numeros.length; i++)
+                    {
+                        if(numeros[i] == txtNumero.value)
+                            {
+                                incluiu = false;
+                                break;
+                            }
+                    }
+                
+                if(incluiu)
+                    {
+                        numeros.push(txtNumero.value);
+                        console.log(numeros);
+                    }
+                else{
+                    alert("Numero já se encontra na lista.")
+                }
+            }
+            
+            btnIncluir.onclick = incluiNumero;
+     
+        
+       
+        
+        
+        </script>
+        
+    
+    </body>
+
+</html>

@@ -1,0 +1,137 @@
+<html>
+<meta charset="utf-8">
+    <header>
+        <title>Segredo do Números</title>
+    </header>
+    
+    <style>
+        div{
+            width: 40%;
+            height: 250px;
+            margin: 0 auto;
+            background-color: azure;
+            padding: 10px;
+            text-align: center;
+        }
+    
+    </style>
+    
+    <body>
+    
+        <div>
+            <h1>Loteria</h1>
+        
+            <input type="text" id="txtNumero" />
+            <input type="submit" id="btnIncluir" value="Verificar"/>
+            
+            <p>Apostas:</p>
+            <p>
+                <input type="text" id="lblApostas" readonly="true" />
+            </p>
+        </div>
+        
+        
+        <script>
+        
+         var txtNumero = document.getElementById("txtNumero");
+         var btnIncluir = document.getElementById("btnIncluir");
+         var lblApostas = document.getElementById("lblApostas");
+       
+         var quantidadeDezenas = 6
+         var numerosDaSorte = [];
+        
+         var sorteou = false;
+           
+            while(sorteou == false)
+            {
+                var numeroSorteado = Math.round(Math.random() * 60);
+                var podeIncluir = true;
+                
+                for(var i = 0; i <= numerosDaSorte.length; i++)
+                {
+                    if(numeroSorteado == numerosDaSorte[i] || numeroSorteado == 0)
+                        {
+                            podeIncluir = false;
+                        }
+                }
+                if(podeIncluir)
+                {
+                  numerosDaSorte.push(numeroSorteado);
+                  console.log(numerosDaSorte);
+                    
+                  if(numerosDaSorte.length == quantidadeDezenas)
+                      {
+                          sorteou = true;
+                      }
+                }
+            }
+            
+            
+           
+            
+            var apostas = [];
+            var apostar = function()
+            {
+                
+                for(var i = 0; i<apostas.length; i++)
+                    {
+                        if(apostas[i] == txtNumero.value)
+                            {
+                                alert('Você já apostou este número. Aposte outro.');
+                                
+                                return;
+                            }
+                    }
+                
+                apostas.push(txtNumero.value);
+                txtNumero.value = "";
+                lblApostas.value = apostas;
+                
+                if(apostas.length == quantidadeDezenas)
+                    {
+                        btnIncluir.style.visibility = 'hidden';
+                        
+                        conferirAposta();
+                    }
+                
+            }
+        
+             var conferirAposta = function()
+            {
+                
+                debugger;
+                var acertos = [];
+                
+                for(var i = 0; i < numerosDaSorte.length; i++)
+                    {
+                        for(var j = 0; j < apostas.length; j++)
+                            {
+                                if(numerosDaSorte[i] == apostas[j])
+                                    {
+                                        acertos.push(apostas[i]);
+                                    }
+                            }
+                    }
+                
+                if(acertos.length == quantidadeDezenas)
+                    {
+                        alert('Você esta milionário! Acertou os '+quantidadeDezenas+' números da Sorte!!!');
+                    }
+                else{
+                    alert('Não foi desta vez. Os números são: '+numerosDaSorte+' e você acertou: '+acertos.length)
+                }
+                
+                               
+            }
+             
+              btnIncluir.onclick = apostar;
+       
+           
+        
+        
+        </script>
+        
+    
+    </body>
+
+</html>

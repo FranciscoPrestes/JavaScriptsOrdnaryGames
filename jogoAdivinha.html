@@ -1,0 +1,85 @@
+<meta charset="UTF-8">
+
+<script>
+
+var pulaLinha = function()
+{
+	document.write("<br>");
+}
+
+var escreve = function(texto)
+{
+	document.write(texto);
+	pulaLinha()
+}
+
+var verificaChances = function()
+{
+	if(chaces > 0)
+	{
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+var darNovoPalpite = function()
+{
+	palpite = prompt("Você tem mais "+chaces +" chace(s). Qual seu próximo palpite?")
+
+	return verificaPalpite();
+}
+var darDica = function()
+{
+	if(numeroPensado < palpite)
+	{
+		escreve("Seu palpite foi: <strong>"+palpite+"</strong>.  Na verdade pensei em um número <strong>menor</strong>. Você tem mais <strong>"+chaces+" chance(s)</strong>.");
+	}
+	else{
+		escreve("Seu palpite foi: <strong>"+palpite+"</strong>. Na verdade pensei em um número <strong>maior</strong>. Você tem mais <strong>"+chaces+" chance(s)</strong>.");
+	}
+}
+
+var verificaPalpite = function()
+{
+	if(palpite == numeroPensado)
+	{
+		escreve("Parabêns eu pensei exatamente no número <strong>"+palpite+"</strong>");
+		return true;
+	}
+	else{
+		chaces--;
+		if(verificaChances())
+		{
+			darDica();
+		    return darNovoPalpite();
+
+		}
+		else{
+			escreve("Seu ultimo palpite foi: <strong>"+palpite+"</strong>.<br>Infelizmente suas chaces acabaram e você não descobriu o número que era: <strong>"+ numeroPensado+"</strong>");
+			return false;
+		}
+	}
+}
+
+
+
+
+//variavei de controle
+var numeroPensado = Math.round(Math.random() * 100);
+var chaces = 5;
+
+//explicacao do jogo
+
+alert("Bem vindo ao jogo de adivinhar números! Você tem "+chaces+" chances para adivinhar o número que eu pensei de 0 a 100. A cada erro vou dar dicas!");
+var palpite = prompt("Qual seu primeiro palpite?");
+
+
+var jogoAcabou = verificaPalpite();
+
+
+
+
+
+</script>
